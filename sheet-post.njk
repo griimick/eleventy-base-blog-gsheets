@@ -1,0 +1,15 @@
+---
+pagination:
+   data: sheet
+   size: 1
+   alias: sheet
+title: {{ sheet.title }}
+description: {{ sheet.description }}
+date: {{ sheet.date }}
+tags:
+  - post
+layout: layouts/post.njk
+permalink: "posts/{{ sheet.title | slug  }}/"
+---
+
+{{ sheet.content }}
