@@ -3,7 +3,7 @@ const axios = require("axios");
 
 const sheetID = "1i5BM1WzReDZ__95Vz2LLk0JHb0WaJeTsBoJhv5D_y3g";
 const googleSheetUrl = `https://spreadsheets.google.com/feeds/list/${sheetID}/od6/public/values?alt=json`;
-const columns = ["date", "title", "description", "tag", "layout", "content"];
+const columns = ["date", "title", "description", "tags", "layout", "content"];
 
 module.exports = () => {
 	return new Promise((resolve, reject) => {
@@ -14,15 +14,16 @@ module.exports = () => {
 				response.data.feed.entry.forEach(item => {
 					let itemData = {};
 					for (col of columns) {
-						if (col === 'date')
-							itemData[col] = new Date(item[`gsx$${col}`].$t).toISOString();
+						if (col === 'tags')
+							itemData[col] = item[`gsx$${col}`].$t.split(",");
 						else
 							itemData[col] = item[`gsx$${col}`].$t;
 					}
+					console.log({item, itemData});
 					data.push(itemData);
 				});
 
-				let path = `${__dirname}/../sheet.json`;
+				let path = `${__dirname}/../dev/posts.json`;
 
 				fs.writeFile(path, JSON.stringify(data), err => {
 					if(err) {

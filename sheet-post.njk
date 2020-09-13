@@ -1,15 +1,15 @@
 ---
 pagination:
-   data: sheet
+   data: posts
    size: 1
    alias: sheet
-title: {{ sheet.title }}
-description: {{ sheet.description }}
-date: {{ sheet.date }}
+layout: layouts/post.njk
+permalink: "posts/{{ sheet.title | slug }}/"
 tags:
   - post
-layout: layouts/post.njk
-permalink: "posts/{{ sheet.title | slug  }}/"
+eleventyComputed:
+  title: "{{ sheet.tags }}"
+  date: "{{ sheet.date }}"
+  content: "{{ sheet.content }}"
+  description: "{{ sheet.description }}"
 ---
-
-{{ sheet.content }}
