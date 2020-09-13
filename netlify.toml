@@ -1,3 +1,3 @@
 [build]
   publish = "_site"
-  command = "DEBUG=* eleventy"
+  command = "DEBUG=* ELEVENTY_ENV=prod eleventy"

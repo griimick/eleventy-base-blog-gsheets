@@ -1,13 +1,13 @@
 # eleventy-base-blog-gsheets
 
+[![Build Status](https://travis-ci.org/11ty/eleventy-base-blog.svg?branch=master)](https://travis-ci.org/11ty/eleventy-base-blog)
+
 A starter repository showing how to build a blog with the [Eleventy](https://github.com/11ty/eleventy) static site generator and get its data from Google Sheets.
 The workflow becomes as simple as updating the Google Sheet to update the blog.
 
 ## Use Case
 
 I have been using this template to generate personal investment summary in a private side project. I will add a link to the project here once it is done.
-
-[![Build Status](https://travis-ci.org/11ty/eleventy-base-blog.svg?branch=master)](https://travis-ci.org/11ty/eleventy-base-blog)
 
 ## Demos
 
