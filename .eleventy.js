@@ -19,6 +19,10 @@ module.exports = function(eleventyConfig) {
 		return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd LLL yyyy");
 	});
 
+	eleventyConfig.addFilter("dateObj", dateString => {
+		return new  Date(dateString);
+	});
+
 	// https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
 	eleventyConfig.addFilter('htmlDateString', (dateObj) => {
 		return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat('yyyy-LL-dd');
@@ -34,7 +38,7 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addCollection("posts", function(collectionApi) {
-		return collectionApi.getAll();
+		return collectionApi.getFilteredByTag("post");
 	});
 
 	eleventyConfig.addCollection("tagList", function(collection) {
@@ -48,8 +52,6 @@ module.exports = function(eleventyConfig) {
 							// this list should match the `filter` list in tags.njk
 						case "all":
 						case "nav":
-						case "post":
-						case "posts":
 							return false;
 					}
 

@@ -16,10 +16,11 @@ module.exports = () => {
 					for (col of columns) {
 						if (col === 'tags')
 							itemData[col] = item[`gsx$${col}`].$t.split(",");
+						else if (col === 'date')
+							itemData[col] = new Date(item[`gsx$${col}`].$t);
 						else
 							itemData[col] = item[`gsx$${col}`].$t;
 					}
-					console.log({item, itemData});
 					data.push(itemData);
 				});
 

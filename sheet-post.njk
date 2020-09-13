@@ -3,13 +3,15 @@ pagination:
    data: posts
    size: 1
    alias: sheet
-layout: layouts/post.njk
+   addAllPagesToCollections: true
+tags: post
 permalink: "posts/{{ sheet.title | slug }}/"
-tags:
-  - post
 eleventyComputed:
-  title: "{{ sheet.tags }}"
+  title: "{{ sheet.title }}"
   date: "{{ sheet.date }}"
   content: "{{ sheet.content }}"
   description: "{{ sheet.description }}"
+layout: post
 ---
+
+{{ content | safe }}
