@@ -1,0 +1,17 @@
+---
+pagination:
+   data: posts
+   size: 1
+   alias: sheet
+   addAllPagesToCollections: true
+permalink: "posts/{{ sheet.title | slug }}/"
+tags: post
+eleventyComputed:
+  title: "{{ sheet.title }}"
+  created_date: "{{ sheet.date | formatDate }}"
+  content: "{{ sheet.content }}"
+  description: "{{ sheet.description }}"
+layout: post
+---
+
+{{ content | safe }}
