@@ -1,5 +1,6 @@
 const fs    = require("fs");
 const axios = require("axios");
+const { DateTime } = require("luxon");
 
 const sheetID = "1i5BM1WzReDZ__95Vz2LLk0JHb0WaJeTsBoJhv5D_y3g";
 const googleSheetUrl = `https://spreadsheets.google.com/feeds/list/${sheetID}/od6/public/values?alt=json`;
@@ -16,8 +17,6 @@ module.exports = () => {
 					for (col of columns) {
 						if (col === 'tags')
 							itemData[col] = item[`gsx$${col}`].$t.split(",");
-						else if (col === 'date')
-							itemData[col] = new Date(item[`gsx$${col}`].$t);
 						else
 							itemData[col] = item[`gsx$${col}`].$t;
 					}

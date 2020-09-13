@@ -16,11 +16,13 @@ module.exports = function(eleventyConfig) {
 	eleventyConfig.addLayoutAlias("post", "layouts/post.njk");
 
 	eleventyConfig.addFilter("readableDate", dateObj => {
+		if (typeof dateObj === "string")
+			dateObj = new Date(dateObj);
 		return DateTime.fromJSDate(dateObj, {zone: 'utc'}).toFormat("dd LLL yyyy");
 	});
 
-	eleventyConfig.addFilter("dateObj", dateString => {
-		return new  Date(dateString);
+	eleventyConfig.addFilter("formatDate", dateString => {
+		return DateTime.fromFormat(dateString, "dd-MM-yyyy");
 	});
 
 	// https://html.spec.whatwg.org/multipage/common-microsyntaxes.html#valid-date-string
@@ -38,20 +40,23 @@ module.exports = function(eleventyConfig) {
 	});
 
 	eleventyConfig.addCollection("posts", function(collectionApi) {
-		return collectionApi.getFilteredByTag("post");
+		let posts = collectionApi.getFilteredByTag("post");
+		return posts;
 	});
 
 	eleventyConfig.addCollection("tagList", function(collection) {
 		let tagSet = new Set();
 		collection.getAll().forEach(function(item) {
 			if( "tags" in item.data ) {
-				let tags = item.data.tags;
+				let tags = [...item.data.tags, ...item.data.sheet.tags];
 
 				tags = tags.filter(function(item) {
 					switch(item) {
 							// this list should match the `filter` list in tags.njk
 						case "all":
 						case "nav":
+						case "posts":
+						case "post":
 							return false;
 					}
 

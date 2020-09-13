@@ -4,11 +4,11 @@ pagination:
    size: 1
    alias: sheet
    addAllPagesToCollections: true
-tags: post
 permalink: "posts/{{ sheet.title | slug }}/"
+tags: post
 eleventyComputed:
   title: "{{ sheet.title }}"
-  date: "{{ sheet.date }}"
+  created_date: "{{ sheet.date | formatDate }}"
   content: "{{ sheet.content }}"
   description: "{{ sheet.description }}"
 layout: post
